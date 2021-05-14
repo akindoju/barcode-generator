@@ -6,7 +6,7 @@ const Barcode = (props) => {
   const { inputRef } = useBarcode({
     value: `${barcodeValue}`,
     options: {
-      displayValue: false,
+      //   displayValue: false,
     },
   });
 

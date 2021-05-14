@@ -1,7 +1,7 @@
 import React from 'react';
 
-const QRCode = () => {
+const qrCodePage = () => {
   return <div></div>;
 };
 
-export default QRCode;
+export default qrCodePage;

@@ -1,8 +1,8 @@
 import { Route, Switch } from 'react-router';
 import './App.css';
-import Barcode from './pages/barcodePage/barcodePage';
+import BarcodePage from './pages/barcodePage/barcodePage';
 import Homepage from './pages/homepage/homepage';
-import QRCode from './pages/qrCode/qrCode';
+import QRCodePage from './pages/qrCodePage/qrCodePage';
 
 function App() {
   return (
@@ -12,10 +12,10 @@ function App() {
           <Homepage />
         </Route>
         <Route path="/barcode" exact>
-          <Barcode />
+          <BarcodePage />
         </Route>
         <Route path="/qrCode" exact>
-          <QRCode />
+          <QRCodePage />
         </Route>
       </Switch>
     </div>

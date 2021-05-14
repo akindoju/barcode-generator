@@ -3,7 +3,7 @@ import Barcode from '../../components/Barcode/Barcode';
 
 const BarcodePage = () => {
   const [barcodeValue, setBarcodeValue] = useState('');
-  const [btnClicked, setBtnClicked] = useState('true');
+  const [btnClicked, setBtnClicked] = useState(false);
 
   // const displayBarcode = () => {
   //   <Barcode barcodeValue={barcodeValue} />;
@@ -12,13 +12,14 @@ const BarcodePage = () => {
 
   return (
     <div>
-      <form onSubmit={(e) => e.preventDefault()}>
+      <form>
         <label htmlFor="barcode">Enter value for Barcode</label>
         <input
           id="barcode"
           onChange={(event) => {
             event.preventDefault();
             setBarcodeValue(event.target.value);
+            setBtnClicked(false);
           }}
         />
       </form>
@@ -30,7 +31,7 @@ const BarcodePage = () => {
       >
         Generate
       </button>
-      {btnClicked === true ? <Barcode barcodeValue={barcodeValue} /> : null}
+      {btnClicked === true && <Barcode barcodeValue={barcodeValue} />}
     </div>
   );
 };
