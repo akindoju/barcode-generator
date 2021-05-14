@@ -5,23 +5,28 @@ const Homepage = () => {
   const history = useHistory();
 
   return (
-    <div>
-      <button
-        onClick={(event) => {
-          event.preventDefault();
-          history.push('/barcode');
-        }}
-      >
-        Barcode Generator
-      </button>
-      <button
-        onClick={(event) => {
-          event.preventDefault();
-          history.push('/qrCode');
-        }}
-      >
-        QR Code Generator
-      </button>
+    <div className="homepage">
+      <h2 className="homepageTitle">Barcode and QR Code Generator</h2>
+      <div className="row">
+        <button
+          className="col-1-of-2 btn"
+          onClick={(event) => {
+            event.preventDefault();
+            history.push('/barcode');
+          }}
+        >
+          Barcode Generator
+        </button>
+        <button
+          className="col-1-of-2 btn"
+          onClick={(event) => {
+            event.preventDefault();
+            history.push('/qrCode');
+          }}
+        >
+          QR Code Generator
+        </button>
+      </div>
     </div>
   );
 };
