@@ -1,6 +1,6 @@
 import { Route, Switch } from 'react-router';
 import './App.css';
-import Barcode from './pages/barcode/barcode';
+import Barcode from './pages/barcodePage/barcodePage';
 import Homepage from './pages/homepage/homepage';
 import QRCode from './pages/qrCode/qrCode';
 
