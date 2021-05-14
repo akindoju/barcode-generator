@@ -6,7 +6,7 @@ const Homepage = () => {
 
   return (
     <div className="homepage">
-      <h2 className="homepageTitle">Barcode and QR Code Generator</h2>
+      <h2 className="title">Barcode and QR Code Generator</h2>
       <div className="row">
         <button
           className="col-1-of-2 btn"

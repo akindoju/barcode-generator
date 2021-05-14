@@ -6,30 +6,37 @@ const BarcodePage = () => {
   const [btnClicked, setBtnClicked] = useState(false);
 
   return (
-    <div>
-      <form>
-        <label htmlFor="barcode">Enter Barcode Value</label>
+    <div className="generatorPage">
+      <h2 className="title">Barcode Generator</h2>
+      <form className="form">
+        <label htmlFor="barcode" className="label">
+          Enter Barcode Value
+        </label>
         <input
+          placeholder="eg 123456 "
+          className="input"
           id="barcode"
           onChange={(event) => {
-            event.preventDefault();
             setBarcodeValue(event.target.value);
 
             //to reset barcode value and also state
             setBtnClicked(false);
           }}
         />
+        <button
+          className="generateBtn"
+          disabled={barcodeValue.length === 0}
+          onClick={(event) => {
+            event.preventDefault();
+            setBtnClicked(true);
+          }}
+        >
+          Generate
+        </button>
       </form>
-      <button
-        disabled={barcodeValue.length === 0}
-        onClick={(event) => {
-          event.preventDefault();
-          setBtnClicked(true);
-        }}
-      >
-        Generate
-      </button>
-      {btnClicked === true && <Barcode barcodeValue={barcodeValue} />}
+      {btnClicked === true && (
+        <Barcode barcodeValue={barcodeValue} className="barcode" />
+      )}
     </div>
   );
 };

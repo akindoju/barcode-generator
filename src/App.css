@@ -24,7 +24,13 @@ body {
   padding: 5rem;
 }
 
-.homepageTitle {
+.generatorPage {
+  background-color: #f7f7f7;
+  padding: 5rem;
+  text-align: center;
+}
+
+.title {
   text-align: center;
   text-transform: uppercase;
   font-weight: 700;
@@ -91,4 +97,49 @@ body {
 
 .btn:active {
   transform: scale(0.98);
+}
+
+.label {
+  display: block;
+}
+
+.input {
+  width: 50%;
+  padding: 8px;
+  border: 1px solid black;
+  border-radius: 3px;
+  outline: none;
+}
+
+.generateBtn {
+  width: 20%;
+  padding: 8px;
+  margin-left: 5px;
+  cursor: pointer;
+  background-image: linear-gradient(
+    to right bottom,
+    rgba(219, 41, 255, 0.85),
+    rgba(86, 67, 250, 0.85)
+  );
+  outline: none;
+  border: none;
+  color: white;
+  font-size: 15px;
+  border-radius: 5px;
+}
+
+.generateBtn:hover {
+  background-image: linear-gradient(
+    to right bottom,
+    rgba(219, 41, 255, 0.85),
+    rgba(107, 97, 197, 0.85)
+  );
+}
+
+.generateBtn:active {
+  transform: scale(0.98);
+}
+
+svg {
+  margin-top: 20px;
 }

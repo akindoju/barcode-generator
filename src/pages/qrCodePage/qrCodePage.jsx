@@ -10,6 +10,7 @@ const QRCodePage = () => {
       <form>
         <label htmlFor="qrCode">Enter QRCode Value</label>
         <input
+          placeholder="eg 123456 "
           id="qrCode"
           onChange={(event) => {
             event.preventDefault();
