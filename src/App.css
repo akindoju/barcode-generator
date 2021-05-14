@@ -25,6 +25,7 @@ body {
 }
 
 .generatorPage {
+  position: relative;
   background-color: #f7f7f7;
   padding: 5rem;
   text-align: center;
@@ -146,4 +147,34 @@ svg {
 
 QRCode {
   margin-top: 20px;
+}
+
+.backBtn {
+  position: absolute;
+  top: 20px;
+  left: 30px;
+  cursor: pointer;
+  background-image: linear-gradient(
+    to right bottom,
+    rgba(219, 41, 255, 0.85),
+    rgba(86, 67, 250, 0.85)
+  );
+  outline: none;
+  border: none;
+  color: white;
+  font-size: 25px;
+  border-radius: 5px;
+  padding: 1px 10px;
+}
+
+.backBtn:hover {
+  background-image: linear-gradient(
+    to right bottom,
+    rgba(219, 41, 255, 0.85),
+    rgba(107, 97, 197, 0.85)
+  );
+}
+
+.backBtn:active {
+  transform: scale(0.98);
 }

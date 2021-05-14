@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import BackBtn from '../../components/BackBtn/BackBtn';
 import Barcode from '../../components/Barcode/Barcode';
 
 const BarcodePage = () => {
@@ -7,6 +8,7 @@ const BarcodePage = () => {
 
   return (
     <div className="generatorPage">
+      <BackBtn />
       <h2 className="title">Barcode Generator</h2>
       <form>
         <label htmlFor="barcode" className="label">

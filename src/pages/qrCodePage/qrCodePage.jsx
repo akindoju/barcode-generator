@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import BackBtn from '../../components/BackBtn/BackBtn';
 import QRCode from '../../components/QRCode/QRCode';
 
 const QRCodePage = () => {
@@ -7,6 +8,7 @@ const QRCodePage = () => {
 
   return (
     <div className="generatorPage">
+      <BackBtn />
       <h2 className="title">QR Code Generator</h2>
       <form>
         <label htmlFor="qrCode" className="label">
