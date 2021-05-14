@@ -8,7 +8,7 @@ const BarcodePage = () => {
   return (
     <div className="generatorPage">
       <h2 className="title">Barcode Generator</h2>
-      <form className="form">
+      <form>
         <label htmlFor="barcode" className="label">
           Enter Barcode Value
         </label>
@@ -34,9 +34,7 @@ const BarcodePage = () => {
           Generate
         </button>
       </form>
-      {btnClicked === true && (
-        <Barcode barcodeValue={barcodeValue} className="barcode" />
-      )}
+      {btnClicked === true && <Barcode barcodeValue={barcodeValue} />}
     </div>
   );
 };

@@ -6,30 +6,34 @@ const QRCodePage = () => {
   const [btnClicked, setBtnClicked] = useState(false);
 
   return (
-    <div>
+    <div className="generatorPage">
+      <h2 className="title">QR Code Generator</h2>
       <form>
-        <label htmlFor="qrCode">Enter QRCode Value</label>
+        <label htmlFor="qrCode" className="label">
+          Enter QRCode Value
+        </label>
         <input
           placeholder="eg 123456 "
+          className="input"
           id="qrCode"
           onChange={(event) => {
-            event.preventDefault();
             setQRCodeValue(event.target.value);
 
             //to reset qrCode value and also state
             setBtnClicked(false);
           }}
         />
+        <button
+          className="generateBtn"
+          disabled={qrCodeValue.length === 0}
+          onClick={(event) => {
+            event.preventDefault();
+            setBtnClicked(true);
+          }}
+        >
+          Generate
+        </button>
       </form>
-      <button
-        disabled={qrCodeValue.length === 0}
-        onClick={(event) => {
-          event.preventDefault();
-          setBtnClicked(true);
-        }}
-      >
-        Generate
-      </button>
       {btnClicked === true && <QRCode qrCodeValue={qrCodeValue} />}
     </div>
   );
