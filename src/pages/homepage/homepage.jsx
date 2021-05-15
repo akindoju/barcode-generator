@@ -6,17 +6,8 @@ const Homepage = () => {
 
   return (
     <div className="homepage">
-      <h2 className="title">Barcode and QR Code Generator</h2>
+      <h2 className="title"> QR Code and Barcode Generator</h2>
       <div className="row">
-        <button
-          className="col-1-of-2 btn"
-          onClick={(event) => {
-            event.preventDefault();
-            history.push('/barcode');
-          }}
-        >
-          Barcode Generator
-        </button>
         <button
           className="col-1-of-2 btn"
           onClick={(event) => {
@@ -25,6 +16,15 @@ const Homepage = () => {
           }}
         >
           QR Code Generator
+        </button>
+        <button
+          className="col-1-of-2 btn"
+          onClick={(event) => {
+            event.preventDefault();
+            history.push('/barcode');
+          }}
+        >
+          Barcode Generator
         </button>
       </div>
     </div>
