@@ -187,4 +187,13 @@ QRCode {
   .title {
     font-size: 3.5rem;
   }
+
+  .input {
+    width: 70%;
+  }
+
+  .generateBtn {
+    width: 30%;
+    margin-top: 0.5rem;
+  }
 }
