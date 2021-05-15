@@ -12,7 +12,7 @@ const BackBtn = () => {
         history.push('/');
       }}
     >
-      <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+      <i className="fa fa-long-arrow-left" aria-hidden="true"></i>
     </button>
   );
 };

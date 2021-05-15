@@ -84,8 +84,8 @@ body {
   border: none;
   padding: 2rem;
   color: white;
-  font-size: 20px;
-  border-radius: 5px;
+  font-size: 2rem;
+  border-radius: 0.5rem;
 }
 
 .btn:hover {
@@ -106,16 +106,16 @@ body {
 
 .input {
   width: 50%;
-  padding: 8px;
+  padding: 0.8rem;
   border: 1px solid black;
-  border-radius: 3px;
+  border-radius: 0.3rem;
   outline: none;
 }
 
 .generateBtn {
   width: 20%;
-  padding: 8px;
-  margin-left: 5px;
+  padding: 0.8rem;
+  margin-left: 0.5rem;
   cursor: pointer;
   background-image: linear-gradient(
     to right bottom,
@@ -125,8 +125,8 @@ body {
   outline: none;
   border: none;
   color: white;
-  font-size: 15px;
-  border-radius: 5px;
+  font-size: 1.5rem;
+  border-radius: 0.5rem;
 }
 
 .generateBtn:hover {
@@ -142,17 +142,17 @@ body {
 }
 
 svg {
-  margin-top: 20px;
+  margin-top: 2rem;
 }
 
 QRCode {
-  margin-top: 20px;
+  margin-top: 2rem;
 }
 
 .backBtn {
   position: absolute;
-  top: 20px;
-  left: 30px;
+  top: 2rem;
+  left: 3rem;
   cursor: pointer;
   background-image: linear-gradient(
     to right bottom,
@@ -162,9 +162,9 @@ QRCode {
   outline: none;
   border: none;
   color: white;
-  font-size: 25px;
-  border-radius: 5px;
-  padding: 1px 10px;
+  font-size: 2.5rem;
+  border-radius: 0.5rem;
+  padding: 1px 1rem;
 }
 
 .backBtn:hover {
@@ -177,4 +177,14 @@ QRCode {
 
 .backBtn:active {
   transform: scale(0.98);
+}
+
+@media screen and (max-width: 500px) {
+  html {
+    font-size: 50%;
+  }
+
+  .title {
+    font-size: 3.5rem;
+  }
 }
