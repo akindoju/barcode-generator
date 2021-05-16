@@ -52,19 +52,7 @@ body {
   text-align: center;
 }
 
-.row:not(:last-child) {
-  margin-bottom: 8rem;
-}
-
-.row::after {
-  display: table;
-  content: '';
-  clear: both;
-}
-
-.row [class^='col'] {
-  float: left;
-}
+/*Class after .row that starts with "col"*/
 .row [class^='col']:not(:last-child) {
   margin-right: 6rem;
 }
@@ -143,6 +131,7 @@ body {
 
 svg {
   margin-top: 2rem;
+  align-items: center;
 }
 
 QRCode {
@@ -186,6 +175,12 @@ QRCode {
 
   .title {
     font-size: 3.5rem;
+  }
+
+  .btn {
+    text-align: center;
+    padding: 2rem 4rem;
+    font-size: 2rem;
   }
 
   .input {
