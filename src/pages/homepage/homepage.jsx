@@ -15,7 +15,7 @@ const Homepage = () => {
             history.push('/qrCode');
           }}
         >
-          QRCode Generator
+          QR Code Generator
         </button>
         <button
           className="col-1-of-2 btn"

@@ -133,8 +133,9 @@ svg {
   margin-top: 2rem;
 }
 
-QRCode {
+.qrcode {
   margin-top: 2rem;
+  transform: translateX(-20px);
 }
 
 .backBtn {
@@ -192,5 +193,9 @@ QRCode {
     width: 40%;
     font-size: 1.8rem;
     margin-top: 1rem;
+  }
+
+  .qrcode {
+    transform: translateX(-5px);
   }
 }
