@@ -3,23 +3,70 @@ import BackBtn from '../../components/BackBtn/BackBtn';
 import Barcode from '../../components/Barcode/Barcode';
 
 const BarcodePage = () => {
-  const [barcodeValue, setBarcodeValue] = useState('');
+  const [inputField, setInputField] = useState('');
   const [barcodeFormat, setBarcodeFormat] = useState('code128');
   const [errorMsg, setErrorMsg] = useState('');
-  const [btnClicked, setBtnClicked] = useState(false);
+  const [isBtnClicked, setIsBtnClicked] = useState(false);
+  const [isBtnDisabled, setIsBtnDisabled] = useState(true);
+  // const [placeholderValue, setPlaceholderValue] = useState('1234 ABC');
 
   const barcodeFormats = [
-    'code128',
-    'code39',
-    'ean13',
-    'ean8',
-    'ean5',
-    'ean2',
-    'upc',
-    'itf14',
-    'msi',
-    'pharmacode',
+    { placeholder: '1234 ABC', format: 'code128' },
+    { placeholder: '1234 ABC', format: 'code39' },
+    { placeholder: '123456789012', format: 'ean13' },
+    { placeholder: '12345678', format: 'ean8' },
+    { placeholder: '12345', format: 'ean5' },
+    { placeholder: '12', format: 'ean2' },
+    { placeholder: '123456789012', format: 'upc' }, //11
+    { placeholder: '1234567890123', format: 'itf14' },
+    { placeholder: '123456', format: 'msi' },
+    { placeholder: '12345', format: 'pharmacode' },
   ];
+
+  const numberValidation = (target) => {
+    if (
+      (isNaN(target.value) && barcodeFormat === 'ean13') || //if Not a Number or ...
+      (isNaN(target.value) && barcodeFormat === 'ean8') ||
+      (isNaN(target.value) && barcodeFormat === 'ean5') ||
+      (isNaN(target.value) && barcodeFormat === 'ean2') ||
+      (isNaN(target.value) && barcodeFormat === 'upc') ||
+      (isNaN(target.value) && barcodeFormat === 'itf14') ||
+      (isNaN(target.value) && barcodeFormat === 'msi') ||
+      (isNaN(target.value) && barcodeFormat === 'pharmacode')
+    ) {
+      setErrorMsg('Invalid data for this barcode type!');
+    } else {
+      setErrorMsg('');
+    }
+  };
+
+  //disabled btn logic
+  const disabledBtn = (target) => {
+    if (
+      target.value.length === 0 ||
+      (target.value.length !== 12 && barcodeFormat === 'ean13') ||
+      (target.value.length !== 8 && barcodeFormat === 'ean8') ||
+      (target.value.length !== 5 && barcodeFormat === 'ean5') ||
+      (target.value.length !== 2 && barcodeFormat === 'ean2') ||
+      (target.value.length !== 11 && barcodeFormat === 'upc') ||
+      (target.value.length !== 13 && barcodeFormat === 'itf14') ||
+      (target.value.length > 6 && barcodeFormat === 'pharmacode') ||
+      (target.value.length < 2 && barcodeFormat === 'pharmacode')
+    ) {
+      setIsBtnDisabled(true);
+    } else {
+      setIsBtnDisabled(false);
+    }
+  };
+
+  // const settingPlaceholder = () => {
+  //   barcodeFormats.map((format) => {
+  //     return (
+  //       barcodeFormat === format.format &&
+  //       setPlaceholderValue(format.placeholder)
+  //     );
+  //   });
+  // };
 
   return (
     <div className="generatorPage">
@@ -30,58 +77,56 @@ const BarcodePage = () => {
           Enter Barcode Value and Format
         </label>
         <input
-          placeholder="eg 123456 "
+          // placeholder={`eg '${placeholderValue}'`}
+          placeholder="Enter value for Barcode"
           className="input"
           id="barcode"
           onChange={({ target }) => {
-            setBarcodeValue(target.value);
-            setBtnClicked(false); //to reset barcode value and also state
+            setInputField(target.value);
+            setIsBtnClicked(false); //to reset barcode value and also state
+            numberValidation(target);
+            disabledBtn(target);
 
-            if (
-              (isNaN(target.value) && barcodeFormat === 'ean13') ||
-              (isNaN(target.value) && barcodeFormat === 'ean8') ||
-              (isNaN(target.value) && barcodeFormat === 'ean5') ||
-              (isNaN(target.value) && barcodeFormat === 'ean2') ||
-              (isNaN(target.value) && barcodeFormat === 'upc') ||
-              (isNaN(target.value) && barcodeFormat === 'itf14') ||
-              (isNaN(target.value) && barcodeFormat === 'msi') ||
-              (isNaN(target.value) && barcodeFormat === 'pharmacode')
-            ) {
-              setErrorMsg('Invalid data for this barcode type!');
-            } else {
-              setErrorMsg('');
-            }
+            console.log(target.value.length);
           }}
+          value={inputField}
+          autoFocus
         />
+
         <select
           name="formats"
           id="formats"
           className="select"
           onChange={({ target }) => {
             setBarcodeFormat(target.value);
+            setIsBtnClicked(false);
+            setInputField('');
+            setErrorMsg('');
+            setIsBtnDisabled(true);
+            // settingPlaceholder();
           }}
         >
           {barcodeFormats.map((format) => {
             return (
-              <option value={format} key={format}>
-                {format.toUpperCase()}
+              <option value={format.format} key={format.format}>
+                {format.format.toUpperCase()}
               </option>
             );
           })}
         </select>
         <button
-          className="generateBtn"
-          disabled={barcodeValue.length === 0}
+          className={isBtnDisabled ? 'generateBtnDisabled' : 'generateBtn'}
+          disabled={isBtnDisabled} //if btnDisabled === true
           onClick={(event) => {
             event.preventDefault();
-            setBtnClicked(true);
+            setIsBtnClicked(true);
           }}
         >
           Generate
         </button>
       </form>
-      {btnClicked === true && (
-        <Barcode barcodeValue={barcodeValue} barcodeFormat={barcodeFormat} />
+      {isBtnClicked === true && (
+        <Barcode inputField={inputField} barcodeFormat={barcodeFormat} />
       )}
       {<p className="err">{errorMsg}</p>}
     </div>

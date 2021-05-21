@@ -111,7 +111,6 @@ body {
 }
 
 .generateBtn {
-  /* display: block; */
   width: 20%;
   padding: 0.8rem;
   margin-left: 0.5rem;
@@ -138,6 +137,22 @@ body {
 
 .generateBtn:active {
   transform: scale(0.98);
+}
+
+.generateBtnDisabled {
+  width: 20%;
+  padding: 0.8rem;
+  margin-left: 0.5rem;
+  background-image: linear-gradient(
+    to right bottom,
+    rgba(219, 41, 255, 0.5),
+    rgba(86, 67, 250, 0.5)
+  );
+  outline: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  border-radius: 0.5rem;
 }
 
 svg {
