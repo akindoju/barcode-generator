@@ -100,7 +100,18 @@ body {
   outline: none;
 }
 
+.select {
+  width: 20%;
+  padding: 0.7rem;
+  margin-left: 0.5rem;
+  cursor: point;
+  border: 0.2rem solid rgba(219, 41, 255, 0.85);
+  border-radius: 0.5rem;
+  outline: none;
+}
+
 .generateBtn {
+  /* display: block; */
   width: 20%;
   padding: 0.8rem;
   margin-left: 0.5rem;
@@ -198,4 +209,9 @@ svg {
   .qrcode {
     transform: translateX(-5px);
   }
+}
+
+.err {
+  margin-top: 2rem;
+  color: red;
 }

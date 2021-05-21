@@ -5,16 +5,17 @@ import Barcode from '../../components/Barcode/Barcode';
 const BarcodePage = () => {
   const [barcodeValue, setBarcodeValue] = useState('');
   const [barcodeFormat, setBarcodeFormat] = useState('code128');
+  const [errorMsg, setErrorMsg] = useState('');
   const [btnClicked, setBtnClicked] = useState(false);
 
   const barcodeFormats = [
     'code128',
+    'code39',
     'ean13',
     'ean8',
     'ean5',
     'ean2',
     'upc',
-    'code39',
     'itf14',
     'msi',
     'pharmacode',
@@ -26,17 +27,30 @@ const BarcodePage = () => {
       <h2 className="title">Barcode Generator</h2>
       <form>
         <label htmlFor="barcode" className="label">
-          Enter Barcode Value
+          Enter Barcode Value and Format
         </label>
         <input
           placeholder="eg 123456 "
           className="input"
           id="barcode"
-          onChange={(event) => {
-            setBarcodeValue(event.target.value);
+          onChange={({ target }) => {
+            setBarcodeValue(target.value);
+            setBtnClicked(false); //to reset barcode value and also state
 
-            //to reset barcode value and also state
-            setBtnClicked(false);
+            if (
+              (isNaN(target.value) && barcodeFormat === 'ean13') ||
+              (isNaN(target.value) && barcodeFormat === 'ean8') ||
+              (isNaN(target.value) && barcodeFormat === 'ean5') ||
+              (isNaN(target.value) && barcodeFormat === 'ean2') ||
+              (isNaN(target.value) && barcodeFormat === 'upc') ||
+              (isNaN(target.value) && barcodeFormat === 'itf14') ||
+              (isNaN(target.value) && barcodeFormat === 'msi') ||
+              (isNaN(target.value) && barcodeFormat === 'pharmacode')
+            ) {
+              setErrorMsg('Invalid data for this barcode type!');
+            } else {
+              setErrorMsg('');
+            }
           }}
         />
         <select
@@ -69,6 +83,7 @@ const BarcodePage = () => {
       {btnClicked === true && (
         <Barcode barcodeValue={barcodeValue} barcodeFormat={barcodeFormat} />
       )}
+      {<p className="err">{errorMsg}</p>}
     </div>
   );
 };

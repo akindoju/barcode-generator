@@ -9,14 +9,6 @@ const Barcode = (props) => {
     JsBarcode(`#${barcodeFormat}`, barcodeValue, { format: barcodeFormat });
   }, 0);
 
-  // const { inputRef } = useBarcode({
-  //   value: `${barcodeValue}`,
-  //   options: {
-  //     displayValue: false,
-  //     marginTop: 20,
-  //   },
-  // });
-
   return <svg id={barcodeFormat}></svg>;
 };
 
