@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import BackBtn from '../../components/BackBtn/BackBtn';
 import Barcode from '../../components/Barcode/Barcode';
 
@@ -53,7 +53,8 @@ const BarcodePage = () => {
 
   const numberValidation = (target) => {
     if (
-      (isNaN(target.value) && barcodeFormat === 'ean13') || //if Not a Number or ...
+      //if Not a Number or ...
+      (isNaN(target.value) && barcodeFormat === 'ean13') ||
       (isNaN(target.value) && barcodeFormat === 'ean8') ||
       (isNaN(target.value) && barcodeFormat === 'ean5') ||
       (isNaN(target.value) && barcodeFormat === 'ean2') ||
@@ -67,6 +68,12 @@ const BarcodePage = () => {
       setErrorMsg('');
     }
   };
+
+  useEffect(() => {
+    if (errorMsg) {
+      setIsBtnDisabled(true);
+    }
+  }, [errorMsg]);
 
   // const settingPlaceholder = () => {
   //   barcodeFormats.map((format) => {
@@ -91,7 +98,6 @@ const BarcodePage = () => {
           className="input"
           id="barcode"
           onChange={({ target }) => {
-            console.log(inputField);
             setInputField(target.value);
             setIsBtnClicked(false); //to reset barcode value and also state
             numberValidation(target);
