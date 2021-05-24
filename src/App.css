@@ -245,4 +245,11 @@ svg {
     font-size: 1.8rem;
     margin-top: 1rem;
   }
+
+  .backBtn {
+    top: 2rem;
+    left: 1.5rem;
+    font-size: 2rem;
+    padding: 1px 1rem;
+  }
 }
