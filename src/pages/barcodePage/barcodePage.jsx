@@ -42,10 +42,16 @@ const BarcodePage = () => {
     return settingPlaceholder;
   }, [settingPlaceholder]);
 
+  useEffect(() => {
+    if (inputField.length === 0) {
+      setIsBtnDisabled(true);
+      setErrorMsg('');
+    }
+  }, [inputField]);
+
   //disabled btn and set error message logic
   const disabledBtn = (target) => {
     if (
-      target.value.length === 0 ||
       (target.value.length !== 12 && barcodeFormat === 'ean13') ||
       (target.value.length !== 7 && barcodeFormat === 'ean8') ||
       (target.value.length !== 5 && barcodeFormat === 'ean5') ||
@@ -103,7 +109,6 @@ const BarcodePage = () => {
             setInputField('');
             setErrorMsg('');
             setIsBtnDisabled(true);
-            // settingPlaceholder();
           }}
         >
           {barcodeFormats.map((format) => {
