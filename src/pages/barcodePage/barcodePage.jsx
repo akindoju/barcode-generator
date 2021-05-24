@@ -10,6 +10,7 @@ const BarcodePage = () => {
   const [isBtnDisabled, setIsBtnDisabled] = useState(true);
   const [placeholderValue, setPlaceholderValue] = useState('1234 ABC');
 
+  //memoized code to prevent rerender if nothing's changed
   const barcodeFormats = useMemo(
     () => [
       { placeholder: '1234 ABC', format: 'code128' },
@@ -26,7 +27,8 @@ const BarcodePage = () => {
     []
   );
 
-  const barcodeFormatting = useMemo(() => {
+  //memoized code to prevent rerender if nothing's changed
+  const settingPlaceholder = useMemo(() => {
     return barcodeFormats.map((format) => {
       return (
         barcodeFormat === format.format &&
@@ -35,40 +37,23 @@ const BarcodePage = () => {
     });
   }, [barcodeFormat, barcodeFormats]);
 
-  //use effect used to prevent asynchronous setting of state
+  //used to call code at page startup
   useEffect(() => {
-    return barcodeFormatting;
-  }, [barcodeFormatting]);
+    return settingPlaceholder;
+  }, [settingPlaceholder]);
 
-  //use effect used to prevent asynchronous setting of state
-  useEffect(() => {
-    if (errorMsg) {
-      setIsBtnDisabled(true);
-    }
-  }, [errorMsg]);
-
-  //disabled btn logic
+  //disabled btn and set error message logic
   const disabledBtn = (target) => {
     if (
       target.value.length === 0 ||
       (target.value.length !== 12 && barcodeFormat === 'ean13') ||
-      (target.value.length !== 8 && barcodeFormat === 'ean8') ||
+      (target.value.length !== 7 && barcodeFormat === 'ean8') ||
       (target.value.length !== 5 && barcodeFormat === 'ean5') ||
       (target.value.length !== 2 && barcodeFormat === 'ean2') ||
       (target.value.length !== 11 && barcodeFormat === 'upc') ||
       (target.value.length !== 13 && barcodeFormat === 'itf14') ||
       (target.value.length > 6 && barcodeFormat === 'pharmacode') ||
-      (target.value.length < 2 && barcodeFormat === 'pharmacode')
-    ) {
-      setIsBtnDisabled(true);
-    } else {
-      setIsBtnDisabled(false);
-    }
-  };
-
-  const numberValidation = (target) => {
-    if (
-      //if Not a Number or ...
+      (target.value.length < 2 && barcodeFormat === 'pharmacode') ||
       (isNaN(target.value) && barcodeFormat === 'ean13') ||
       (isNaN(target.value) && barcodeFormat === 'ean8') ||
       (isNaN(target.value) && barcodeFormat === 'ean5') ||
@@ -78,20 +63,13 @@ const BarcodePage = () => {
       (isNaN(target.value) && barcodeFormat === 'msi') ||
       (isNaN(target.value) && barcodeFormat === 'pharmacode')
     ) {
+      setIsBtnDisabled(true);
       setErrorMsg('Invalid data for this barcode type!');
     } else {
+      setIsBtnDisabled(false);
       setErrorMsg('');
     }
   };
-
-  // const settingPlaceholder = () => {
-  //   barcodeFormats.map((format) => {
-  //     return (
-  //       barcodeFormat === format.format &&
-  //       setPlaceholderValue(format.placeholder)
-  //     );
-  //   });
-  // };
 
   return (
     <div className="generatorPage">
@@ -109,7 +87,6 @@ const BarcodePage = () => {
           onChange={({ target }) => {
             setInputField(target.value);
             setIsBtnClicked(false); //to reset barcode value and also state
-            numberValidation(target);
             disabledBtn(target);
           }}
           value={inputField}
