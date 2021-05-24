@@ -104,7 +104,7 @@ body {
   width: 20%;
   padding: 0.7rem;
   margin-left: 0.5rem;
-  cursor: point;
+  cursor: pointer;
   border: 0.2rem solid rgba(219, 41, 255, 0.85);
   border-radius: 0.5rem;
   outline: none;
@@ -155,13 +155,20 @@ body {
   border-radius: 0.5rem;
 }
 
+.barcodeContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 svg {
   margin-top: 2rem;
 }
 
-.qrcode {
-  margin-top: 2rem;
-  transform: translateX(-20px);
+.qrContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .backBtn {
@@ -194,6 +201,11 @@ svg {
   transform: scale(0.98);
 }
 
+.err {
+  margin-top: 2rem;
+  color: red;
+}
+
 @media screen and (max-width: 500px) {
   html {
     font-size: 50%;
@@ -215,18 +227,22 @@ svg {
     width: 100%;
   }
 
-  .generateBtn {
+  .select {
     width: 40%;
+    padding: 0.7rem;
+    margin-right: 1rem;
+    margin-top: 1rem;
+  }
+
+  .generateBtn {
+    width: 50%;
     font-size: 1.8rem;
     margin-top: 1rem;
   }
 
-  .qrcode {
-    transform: translateX(-5px);
+  .generateBtnDisabled {
+    width: 50%;
+    font-size: 1.8rem;
+    margin-top: 1rem;
   }
-}
-
-.err {
-  margin-top: 2rem;
-  color: red;
 }

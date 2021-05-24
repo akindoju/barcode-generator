@@ -4,7 +4,11 @@ import QRCode from 'react-qr-code';
 const QrCode = (props) => {
   const { qrCodeValue } = props;
 
-  return <QRCode value={qrCodeValue} className="qrcode" />;
+  return (
+    <div className="qrContainer">
+      <QRCode value={qrCodeValue} size="190" className="qrcode" />
+    </div>
+  );
 };
 
 export default QrCode;

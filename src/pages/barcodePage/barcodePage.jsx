@@ -23,6 +23,7 @@ const BarcodePage = () => {
     { placeholder: '123456', format: 'pharmacode' },
   ];
 
+  //use effect used to prevent asynchronous setting of state
   useEffect(() => {
     barcodeFormats.map((format) => {
       return (
@@ -31,6 +32,13 @@ const BarcodePage = () => {
       );
     });
   }, [barcodeFormat, barcodeFormats]);
+
+  //use effect used to prevent asynchronous setting of state
+  useEffect(() => {
+    if (errorMsg) {
+      setIsBtnDisabled(true);
+    }
+  }, [errorMsg]);
 
   //disabled btn logic
   const disabledBtn = (target) => {
@@ -68,12 +76,6 @@ const BarcodePage = () => {
       setErrorMsg('');
     }
   };
-
-  useEffect(() => {
-    if (errorMsg) {
-      setIsBtnDisabled(true);
-    }
-  }, [errorMsg]);
 
   // const settingPlaceholder = () => {
   //   barcodeFormats.map((format) => {

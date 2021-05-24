@@ -9,7 +9,11 @@ const Barcode = (props) => {
     JsBarcode(`#${barcodeFormat}`, inputField, { format: barcodeFormat });
   }, 0);
 
-  return <svg id={barcodeFormat}></svg>;
+  return (
+    <div className="barcodeContainer">
+      <svg id={barcodeFormat}></svg>
+    </div>
+  );
 };
 
 export default Barcode;
