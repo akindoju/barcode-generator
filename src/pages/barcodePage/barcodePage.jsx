@@ -10,28 +10,35 @@ const BarcodePage = () => {
   const [isBtnDisabled, setIsBtnDisabled] = useState(true);
   const [placeholderValue, setPlaceholderValue] = useState('1234 ABC');
 
-  const barcodeFormats = [
-    { placeholder: '1234 ABC', format: 'code128' },
-    { placeholder: '1234 ABC', format: 'code39' },
-    { placeholder: '123456789012', format: 'ean13' },
-    { placeholder: '12345678', format: 'ean8' },
-    { placeholder: '12345', format: 'ean5' },
-    { placeholder: '12', format: 'ean2' },
-    { placeholder: '123456789012', format: 'upc' }, //11
-    { placeholder: '1234567890123', format: 'itf14' },
-    { placeholder: '123456', format: 'msi' },
-    { placeholder: '123456', format: 'pharmacode' },
-  ];
+  const barcodeFormats = useMemo(
+    () => [
+      { placeholder: '1234 ABC', format: 'code128' },
+      { placeholder: '1234 ABC', format: 'code39' },
+      { placeholder: '123456789012', format: 'ean13' },
+      { placeholder: '12345678', format: 'ean8' },
+      { placeholder: '12345', format: 'ean5' },
+      { placeholder: '12', format: 'ean2' },
+      { placeholder: '123456789012', format: 'upc' },
+      { placeholder: '1234567890123', format: 'itf14' },
+      { placeholder: '123456', format: 'msi' },
+      { placeholder: '123456', format: 'pharmacode' },
+    ],
+    []
+  );
 
-  //use effect used to prevent asynchronous setting of state
-  useEffect(() => {
-    barcodeFormats.map((format) => {
+  const barcodeFormatting = useMemo(() => {
+    return barcodeFormats.map((format) => {
       return (
         barcodeFormat === format.format &&
         setPlaceholderValue(format.placeholder)
       );
     });
   }, [barcodeFormat, barcodeFormats]);
+
+  //use effect used to prevent asynchronous setting of state
+  useEffect(() => {
+    return barcodeFormatting;
+  }, [barcodeFormatting]);
 
   //use effect used to prevent asynchronous setting of state
   useEffect(() => {
