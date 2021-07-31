@@ -1,5 +1,4 @@
 import JsBarcode from 'jsbarcode';
-// import { useBarcode } from 'react-barcodes';
 
 const Barcode = (props) => {
   const { inputField, barcodeFormat } = props;

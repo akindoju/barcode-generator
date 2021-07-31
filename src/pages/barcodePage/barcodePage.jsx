@@ -10,7 +10,7 @@ const BarcodePage = () => {
   const [isBtnDisabled, setIsBtnDisabled] = useState(true);
   const [placeholderValue, setPlaceholderValue] = useState('1234 ABC');
 
-  //memoized code to prevent rerender if nothing's changed
+  //memoized code to prevent re-render if nothing's changed
   const barcodeFormats = useMemo(
     () => [
       { placeholder: '1234 ABC', format: 'code128' },
@@ -27,7 +27,7 @@ const BarcodePage = () => {
     []
   );
 
-  //memoized code to prevent rerender if nothing's changed
+  //memoized code to prevent re-render if nothing's changed
   const settingPlaceholder = useMemo(() => {
     return barcodeFormats.map((format) => {
       return (
