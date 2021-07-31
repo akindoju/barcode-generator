@@ -12,6 +12,6 @@ test("Check that homepage has correct heading and buttons", () => {
   const homepageButtons = screen.getAllByRole("button");
   expect(homepageButtons).toHaveLength(2);
 
-  //check that heading and buttons have correct classnames
+  //check that heading have correct classnames
   expect(homepageHeading).toHaveClass("title");
 });
