@@ -1,4 +1,4 @@
-import JsBarcode from 'jsbarcode';
+import JsBarcode from "jsbarcode";
 
 const Barcode = (props) => {
   const { inputField, barcodeFormat } = props;
@@ -10,7 +10,7 @@ const Barcode = (props) => {
 
   return (
     <div className="barcodeContainer">
-      <svg id={barcodeFormat}></svg>
+      <svg id={barcodeFormat} role="figure"></svg>
     </div>
   );
 };
