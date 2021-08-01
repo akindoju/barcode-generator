@@ -43,7 +43,7 @@ const BarcodePage = () => {
   }, [settingPlaceholder]);
 
   useEffect(() => {
-    if (inputField.length === 0 || inputField === " ") {
+    if (inputField.length === 0) {
       setIsBtnDisabled(true);
       setErrorMsg("");
     }
@@ -91,7 +91,7 @@ const BarcodePage = () => {
           className="input"
           id="barcode"
           onChange={({ target }) => {
-            setInputField(target.value);
+            setInputField(target.value.trim());
             setIsBtnClicked(false); //to reset barcode value and also state
             disabledBtn(target);
           }}
