@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import BackBtn from '../../components/BackBtn/BackBtn';
-import QRCode from '../../components/QRCode/QRCode';
+import React, { useState } from "react";
+import BackBtn from "../../components/BackBtn/BackBtn";
+import QRCode from "../../components/QRCode/QRCode";
 
-const QRCodePage = () => {
-  const [qrCodeValue, setQRCodeValue] = useState('');
+const QRCodePage = ({ isBtnDisabled, setIsBtnDisabled }) => {
+  const [qrCodeValue, setQRCodeValue] = useState("");
   const [btnClicked, setBtnClicked] = useState(false);
 
   return (
@@ -19,14 +19,14 @@ const QRCodePage = () => {
           className="input"
           id="qrCode"
           onChange={(event) => {
-            setQRCodeValue(event.target.value);
-
+            setQRCodeValue(event.target.value.trim());
+            setIsBtnDisabled(false);
             //to reset qrCode value and also state
             setBtnClicked(false);
           }}
         />
         <button
-          className="generateBtn"
+          className={isBtnDisabled ? "generateBtnDisabled" : "generateBtn"}
           disabled={qrCodeValue.length === 0}
           onClick={(event) => {
             event.preventDefault();

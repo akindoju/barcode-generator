@@ -2,12 +2,12 @@ import React, { useState, useEffect, useMemo } from "react";
 import BackBtn from "../../components/BackBtn/BackBtn";
 import Barcode from "../../components/Barcode/Barcode";
 
-const BarcodePage = () => {
+const BarcodePage = ({ isBtnDisabled, setIsBtnDisabled }) => {
   const [inputField, setInputField] = useState("");
   const [barcodeFormat, setBarcodeFormat] = useState("code128");
   const [errorMsg, setErrorMsg] = useState("");
   const [isBtnClicked, setIsBtnClicked] = useState(false);
-  const [isBtnDisabled, setIsBtnDisabled] = useState(true);
+  const [isErrorMsg, setIsErrorMsg] = useState(false);
   const [placeholderValue, setPlaceholderValue] = useState("1234 ABC");
 
   //memoized code to prevent re-render if nothing's changed
@@ -42,14 +42,7 @@ const BarcodePage = () => {
     return settingPlaceholder;
   }, [settingPlaceholder]);
 
-  useEffect(() => {
-    if (inputField.length === 0) {
-      setIsBtnDisabled(true);
-      setErrorMsg("");
-    }
-  }, [inputField]);
-
-  //disabled btn and set error message logic
+  //set error message logic
   const disabledBtn = (target) => {
     if (
       (target.value.length !== 12 && barcodeFormat === "ean13") ||
@@ -69,13 +62,18 @@ const BarcodePage = () => {
       (isNaN(target.value) && barcodeFormat === "msi") ||
       (isNaN(target.value) && barcodeFormat === "pharmacode")
     ) {
-      setIsBtnDisabled(true);
       setErrorMsg("Invalid data for this barcode type!");
     } else {
-      setIsBtnDisabled(false);
       setErrorMsg("");
     }
   };
+
+  //disable btn if input field is empty
+  if (inputField.length === 0) {
+    setIsBtnDisabled(true);
+  } else {
+    setIsBtnDisabled(false);
+  }
 
   return (
     <div className="generatorPage">
@@ -86,14 +84,13 @@ const BarcodePage = () => {
           Enter Barcode Value and Format
         </label>
         <input
-          placeholder={`eg '${placeholderValue}'`}
-          // placeholder="Enter value for Barcode"
+          placeholder={`eg '${placeholderValue}'`} //dynamic placeholder
           className="input"
           id="barcode"
           onChange={({ target }) => {
-            setInputField(target.value.trim());
-            setIsBtnClicked(false); //to reset barcode value and also state
+            setInputField(target.value.trim()); //.trim() to remove whitespaces(space character)
             disabledBtn(target);
+            setIsErrorMsg(false);
           }}
           value={inputField}
           autoFocus
@@ -109,7 +106,6 @@ const BarcodePage = () => {
             setIsBtnClicked(false);
             setInputField("");
             setErrorMsg("");
-            setIsBtnDisabled(true);
           }}
         >
           {barcodeFormats.map((format) => {
@@ -122,10 +118,10 @@ const BarcodePage = () => {
         </select>
         <button
           className={isBtnDisabled ? "generateBtnDisabled" : "generateBtn"}
-          disabled={isBtnDisabled} //if btnDisabled === true
+          disabled={isBtnDisabled}
           onClick={(event) => {
             event.preventDefault();
-            setIsBtnClicked(true);
+            errorMsg ? setIsErrorMsg(true) : setIsBtnClicked(true);
           }}
         >
           Generate
@@ -134,7 +130,7 @@ const BarcodePage = () => {
       {isBtnClicked === true && (
         <Barcode inputField={inputField} barcodeFormat={barcodeFormat} />
       )}
-      {<p className="err">{errorMsg}</p>}
+      {isErrorMsg && <p className="err">{errorMsg}</p>}
     </div>
   );
 };
