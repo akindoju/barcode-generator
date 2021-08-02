@@ -2,8 +2,12 @@ import React, { useState, useEffect, useMemo } from "react";
 import BackBtn from "../../components/BackBtn/BackBtn";
 import Barcode from "../../components/Barcode/Barcode";
 
-const BarcodePage = ({ isBtnDisabled, setIsBtnDisabled }) => {
-  const [inputField, setInputField] = useState("");
+const BarcodePage = ({
+  isBtnDisabled,
+  setIsBtnDisabled,
+  inputField,
+  setInputField,
+}) => {
   const [barcodeFormat, setBarcodeFormat] = useState("code128");
   const [errorMsg, setErrorMsg] = useState("");
   const [isBtnClicked, setIsBtnClicked] = useState(false);

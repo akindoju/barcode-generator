@@ -2,9 +2,20 @@ import React, { useState } from "react";
 import BackBtn from "../../components/BackBtn/BackBtn";
 import QRCode from "../../components/QRCode/QRCode";
 
-const QRCodePage = ({ isBtnDisabled, setIsBtnDisabled }) => {
-  const [qrCodeValue, setQRCodeValue] = useState("");
+const QRCodePage = ({
+  isBtnDisabled,
+  setIsBtnDisabled,
+  inputField,
+  setInputField,
+}) => {
   const [btnClicked, setBtnClicked] = useState(false);
+
+  //disable btn if input field is empty
+  if (inputField.length === 0) {
+    setIsBtnDisabled(true);
+  } else {
+    setIsBtnDisabled(false);
+  }
 
   return (
     <div className="generatorPage">
@@ -15,20 +26,17 @@ const QRCodePage = ({ isBtnDisabled, setIsBtnDisabled }) => {
           Enter QRCode Value
         </label>
         <input
-          placeholder="eg 123456 "
+          placeholder="Enter vaue for QR Code"
           className="input"
           id="qrCode"
-          onChange={(event) => {
-            setQRCodeValue(event.target.value.trim());
-            setIsBtnDisabled(false);
-            //to reset qrCode value and also state
-            setBtnClicked(false);
+          onChange={({ target }) => {
+            setInputField(target.value.trim()); //.trim() to remove whitespaces(space character)
           }}
         />
         <button
           className={isBtnDisabled ? "generateBtnDisabled" : "generateBtn"}
-          disabled={qrCodeValue.length === 0}
-          onClick={(event) => {
+          disabled={isBtnDisabled}
+          onClick={({ event }) => {
             event.preventDefault();
             setBtnClicked(true);
           }}
@@ -36,7 +44,7 @@ const QRCodePage = ({ isBtnDisabled, setIsBtnDisabled }) => {
           Generate
         </button>
       </form>
-      {btnClicked === true && <QRCode qrCodeValue={qrCodeValue} />}
+      {btnClicked && <QRCode qrCodeValue={inputField} />}
     </div>
   );
 };

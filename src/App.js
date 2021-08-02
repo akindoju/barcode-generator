@@ -7,6 +7,7 @@ import QRCodePage from "./pages/qrCodePage/qrCodePage";
 
 function App() {
   const [isBtnDisabled, setIsBtnDisabled] = useState(true);
+  const [inputField, setInputField] = useState("");
 
   return (
     <div className="App">
@@ -18,12 +19,16 @@ function App() {
           <BarcodePage
             isBtnDisabled={isBtnDisabled}
             setIsBtnDisabled={setIsBtnDisabled}
+            inputField={inputField}
+            setInputField={setInputField}
           />
         </Route>
         <Route path="/qrCode" exact>
           <QRCodePage
-          // isBtnDisabled={isBtnDisabled}
-          // setIsBtnDisabled={setIsBtnDisabled}
+            isBtnDisabled={isBtnDisabled}
+            setIsBtnDisabled={setIsBtnDisabled}
+            inputField={inputField}
+            setInputField={setInputField}
           />
         </Route>
       </Switch>
