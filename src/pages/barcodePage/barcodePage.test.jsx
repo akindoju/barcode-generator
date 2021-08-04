@@ -3,7 +3,14 @@ import userEvent from "@testing-library/user-event";
 import BarcodePage from "./barcodePage";
 
 test("checking initial state of components", () => {
-  render(<BarcodePage />);
+  render(
+    <BarcodePage
+      isBtnDisabled={true}
+      setIsBtnDisabled={jest.fn()}
+      inputField={jest.fn()}
+      setInputField={jest.fn()}
+    />
+  );
 
   const barcodeInput = screen.getByLabelText(/Enter Barcode Value and Format/i);
   const barcodeSelect = screen.getByRole("list");
@@ -15,10 +22,17 @@ test("checking initial state of components", () => {
 });
 
 test("Check that button enables when input has value", () => {
-  render(<BarcodePage />);
+  render(
+    <BarcodePage
+      isBtnDisabled={jest.fn()}
+      setIsBtnDisabled={jest.fn()}
+      inputField={jest.fn()}
+      setInputField={jest.fn()}
+    />
+  );
 
   const barcodeInput = screen.getByLabelText(/Enter Barcode Value and Format/i);
-  const generateBtn = screen.getByRole("button", { name: "Generate" });
+  const generateBtn = screen.getByRole("button", { name: /generate/i });
 
   userEvent.type(barcodeInput, "j");
   expect(generateBtn).toBeEnabled();
@@ -42,13 +56,19 @@ test("Check that button enables when input has value", () => {
 // });
 
 test("expect barcode to appear based on generate btn click", () => {
-  render(<BarcodePage />);
+  render(
+    <BarcodePage
+      isBtnDisabled={jest.fn()}
+      setIsBtnDisabled={jest.fn()}
+      inputField={jest.fn()}
+      setInputField={jest.fn()}
+    />
+  );
 
   const barcodeInput = screen.getByLabelText(/Enter Barcode Value and Format/i);
   const generateBtn = screen.getByRole("button", { name: /generate/i });
 
   userEvent.type(barcodeInput, "j");
-  expect(generateBtn).toBeEnabled();
 
   userEvent.click(generateBtn);
 

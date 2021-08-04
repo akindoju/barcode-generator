@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import BackBtn from "../../components/BackBtn/BackBtn";
 import QRCode from "../../components/QRCode/QRCode";
 
@@ -31,12 +31,13 @@ const QRCodePage = ({
           id="qrCode"
           onChange={({ target }) => {
             setInputField(target.value.trim()); //.trim() to remove whitespaces(space character)
+            setBtnClicked(false); //reset qrcode
           }}
         />
         <button
           className={isBtnDisabled ? "generateBtnDisabled" : "generateBtn"}
           disabled={isBtnDisabled}
-          onClick={({ event }) => {
+          onClick={(event) => {
             event.preventDefault();
             setBtnClicked(true);
           }}

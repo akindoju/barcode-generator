@@ -1,9 +1,6 @@
-import React from "react";
 import QRCode from "react-qr-code";
 
-const QrCode = (props) => {
-  const { qrCodeValue } = props;
-
+const QrCode = ({ qrCodeValue }) => {
   return (
     <div className="qrContainer">
       <QRCode value={qrCodeValue} size="190" className="qrcode" role="figure" />
