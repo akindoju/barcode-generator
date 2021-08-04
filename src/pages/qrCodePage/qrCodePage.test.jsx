@@ -49,10 +49,7 @@ test("expect qr code to appear based on generate btn click", () => {
   const qrInput = screen.getByLabelText(/Enter qrcode Value/i);
   const generateBtn = screen.getByRole("button", { name: /generate/i });
 
-  expect(qrInput).not.toHaveValue();
-
   userEvent.type(qrInput, "testing");
-  expect(generateBtn).toBeEnabled();
   userEvent.click(generateBtn);
 
   const qrcode = screen.queryByRole("figure");

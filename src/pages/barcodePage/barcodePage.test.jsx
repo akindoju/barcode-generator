@@ -58,9 +58,9 @@ test("Check that button enables when input has value", () => {
 test("expect barcode to appear based on generate btn click", () => {
   render(
     <BarcodePage
-      isBtnDisabled={jest.fn()}
+      isBtnDisabled={false}
       setIsBtnDisabled={jest.fn()}
-      inputField={jest.fn()}
+      inputField={""}
       setInputField={jest.fn()}
     />
   );
