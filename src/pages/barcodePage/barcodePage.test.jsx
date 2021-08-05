@@ -7,7 +7,7 @@ test("checking initial state of components", () => {
     <BarcodePage
       isBtnDisabled={true}
       setIsBtnDisabled={jest.fn()}
-      inputField={jest.fn()}
+      inputField={""}
       setInputField={jest.fn()}
     />
   );
@@ -24,9 +24,9 @@ test("checking initial state of components", () => {
 test("Check that button enables when input has value", () => {
   render(
     <BarcodePage
-      isBtnDisabled={jest.fn()}
+      isBtnDisabled={false}
       setIsBtnDisabled={jest.fn()}
-      inputField={jest.fn()}
+      inputField={""}
       setInputField={jest.fn()}
     />
   );
@@ -70,6 +70,54 @@ test("expect barcode to appear based on generate btn click", () => {
 
   userEvent.type(barcodeInput, "j");
 
+  userEvent.click(generateBtn);
+
+  const barcode = screen.queryByRole("figure");
+  expect(barcode).toBeInTheDocument();
+});
+
+test("Check that barcode shows on initial format", () => {
+  render(
+    <BarcodePage
+      isBtnDisabled={false}
+      setIsBtnDisabled={jest.fn()}
+      inputField={""}
+      setInputField={jest.fn()}
+    />
+  );
+
+  const barcodeInput = screen.getByLabelText(/Enter Barcode Value and Format/i);
+  const generateBtn = screen.getByRole("button", { name: /generate/i });
+  const code128 = screen.getByRole("option", { name: /code128/i });
+
+  //checking initial format
+  userEvent.click(code128);
+  userEvent.type(barcodeInput, "testing");
+  userEvent.click(generateBtn);
+
+  const barcode = screen.queryByRole("figure");
+  expect(barcode).toBeInTheDocument();
+});
+
+test("Check that barcode shows on another correct format", () => {
+  expect.assertions(2);
+  render(
+    <BarcodePage
+      isBtnDisabled={false}
+      setIsBtnDisabled={jest.fn()}
+      inputField={jest.fn()}
+      setInputField={jest.fn()}
+    />
+  );
+
+  const barcodeInput = screen.getByLabelText(/Enter Barcode Value and Format/i);
+  const generateBtn = screen.getByRole("button", { name: /generate/i });
+  const ean2 = screen.getByRole("option", { name: /ean2/i });
+
+  //checking another correct format
+  userEvent.click(ean2);
+  userEvent.type(barcodeInput, "12");
+  expect(generateBtn).toBeEnabled();
   userEvent.click(generateBtn);
 
   const barcode = screen.queryByRole("figure");
