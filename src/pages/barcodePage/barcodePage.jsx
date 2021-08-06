@@ -20,7 +20,7 @@ const BarcodePage = ({
       { placeholder: "1234 ABC", format: "code128" },
       { placeholder: "1234 ABC", format: "code39" },
       { placeholder: "123456789012", format: "ean13" },
-      { placeholder: "12345678", format: "ean8" },
+      { placeholder: "1234567", format: "ean8" },
       { placeholder: "12345", format: "ean5" },
       { placeholder: "12", format: "ean2" },
       { placeholder: "123456789012", format: "upc" },
@@ -49,22 +49,15 @@ const BarcodePage = ({
   //set error message logic
   const disabledBtn = (target) => {
     if (
-      (target.value.length !== 12 && barcodeFormat === "ean13") ||
-      (target.value.length !== 7 && barcodeFormat === "ean8") ||
-      (target.value.length !== 5 && barcodeFormat === "ean5") ||
-      (target.value.length !== 2 && barcodeFormat === "ean2") ||
-      (target.value.length !== 11 && barcodeFormat === "upc") ||
-      (target.value.length !== 13 && barcodeFormat === "itf14") ||
-      (target.value.length > 6 && barcodeFormat === "pharmacode") ||
-      (target.value.length < 2 && barcodeFormat === "pharmacode") ||
-      (isNaN(target.value) && barcodeFormat === "ean13") ||
-      (isNaN(target.value) && barcodeFormat === "ean8") ||
-      (isNaN(target.value) && barcodeFormat === "ean5") ||
-      (isNaN(target.value) && barcodeFormat === "ean2") ||
-      (isNaN(target.value) && barcodeFormat === "upc") ||
-      (isNaN(target.value) && barcodeFormat === "itf14") ||
-      (isNaN(target.value) && barcodeFormat === "msi") ||
-      (isNaN(target.value) && barcodeFormat === "pharmacode")
+      ((isNaN(target) || target.length !== 12) && barcodeFormat === "ean13") ||
+      ((isNaN(target) || target.length !== 7) && barcodeFormat === "ean8") ||
+      ((isNaN(target) || target.length !== 5) && barcodeFormat === "ean5") ||
+      ((isNaN(target) || target.length !== 2) && barcodeFormat === "ean2") ||
+      ((isNaN(target) || target.length !== 11) && barcodeFormat === "upc") ||
+      ((isNaN(target) || target.length !== 13) && barcodeFormat === "itf14") ||
+      (isNaN(target) && barcodeFormat === "msi") ||
+      ((isNaN(target) || target.length > 6 || target.length < 2) &&
+        barcodeFormat === "pharmacode")
     ) {
       setErrorMsg("Invalid data for this barcode type!");
     } else {
@@ -91,9 +84,10 @@ const BarcodePage = ({
           placeholder={`eg '${placeholderValue}'`} //dynamic placeholder
           className="input"
           id="barcode"
-          onChange={({ target }) => {
-            setInputField(target.value.trim()); //.trim() to remove whitespaces(space character)
-            disabledBtn(target);
+          onChange={(event) => {
+            setInputField(event.target.value.trim()); //.trim() to remove whitespaces(space character)
+            disabledBtn(event.target.value);
+            setIsBtnClicked(false);
             setIsErrorMsg(false);
           }}
           value={inputField}
@@ -101,7 +95,6 @@ const BarcodePage = ({
         />
 
         <select
-          role="list"
           name="formats"
           id="formats"
           className="select"
